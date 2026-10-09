@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rift Possession</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Uses official Socket.io client script served directly by Express -->
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header id="game-header">
+      <div class="score p1"><span class="badge blue">P1</span> <span id="p1-score">0</span></div>
+      <div id="status-panel">
+        <h2 id="turn-announcement">Waiting for match...</h2>
+        <div id="timer-bar"><div id="timer-progress"></div></div>
+        <p id="system-msg">Join a room to begin</p>
+      </div>
+      <div class="score p2"><span id="p2-score">0</span> <span class="badge red">P2</span></div>
+    </header>
+
+    <section id="lobby-panel">
+      <input type="text" id="room-input" placeholder="ROOM CODE" maxlength="8">
+      <button id="join-btn">JOIN ROOM</button>
+      
+      <div class="toggles">
+        <label class="toggle-card">
+          <input type="checkbox" id="chain-toggle">
+          <span class="label-title">Hex Chaining</span>
+          <span class="desc">Continuous path propagation across matches</span>
+        </label>
+
+        <label class="toggle-card">
+          <input type="checkbox" id="locking-toggle" checked>
+          <span class="label-title">Champion Locking</span>
+          <span class="desc">Locked champions cannot be reused</span>
+        </label>
+
+        <div class="toggle-card timer-select-card">
+          <span class="label-title">Turn Timer</span>
+          <select id="timer-select">
+            <option value="30">30 Seconds</option>
+            <option value="60">1 Minute</option>
+            <option value="0">Unlimited</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <main id="board-container">
+      <svg id="hex-grid" viewBox="-360 -360 720 720"></svg>
+    </main>
+
+    <footer id="action-panel">
+      <div id="selected-criteria-display">Selected: <em>None</em></div>
+      <div class="input-row">
+        <input type="text" id="champ-input" placeholder="Type Champion name..." disabled autocomplete="off">
+        <button id="submit-btn" disabled>LOCK IN</button>
+      </div>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
